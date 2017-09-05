@@ -1,0 +1,2 @@
+I successfully completed lab 1. I used my personal computer. The process seemed straightforward enough, and I had fun doing it.
+No major problems were encountered during this project. There were however several syntax errors that needed to be addressed.
