@@ -15,7 +15,7 @@ lance.up()
 andy.goto(-180,20)
 lance.goto(-180,-20)
 
-for i in range(150):        #5. Actually move the turtles
+for i in range(150):        # 5. Actually move the turtles
     andy.forward(random.randrange(1,5))
     lance.forward(random.randrange(1,5))
 
