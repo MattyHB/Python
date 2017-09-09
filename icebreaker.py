@@ -1,13 +1,13 @@
-name1 = input("Please enter the name of Player 1: ")
-name2 = input("Please enter the name of Player 2: ")
+name1 = input("Enter the name of Player 1: ")
+name2 = input("Enter the name of Player 2: ")
 
 # First Question
     #First Player
-answer1_1 = input("How many stuffed animals do you own, " + name1 + "? ")
+answer1_1 = input(name1 + "How many stuffed animals do you have? ")
 runningTotalP1 = int(answer1_1) * 3 + 5
 print("> Your turtle moves", runningTotalP1, "steps. Total steps so far:" , runningTotalP1)
     #Second Player
-answer1_2 = input("How many stuffed animals do you own, " + name2 + "? ")
+answer1_2 = input(name2 + "How many stuffed animals do you have?")
 runningTotalP2 = int(answer1_2) * 3 + 5
 print("> Your turtle moves", runningTotalP2, "steps. Total steps so far:" , runningTotalP2)
 
@@ -62,7 +62,7 @@ print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runnin
 # 90 version 
 # Fourth question
     # First Player
-answer4_1 = input(name1 + ", How many Facebook friends do you have? ")
+answer4_1 = input(name1 + ", how many Facebook friends do you have? ")
 friendNum1 = int(answer4_1)
 if friendNum1 <= 500:
     currentTotal = friendNum1 // 100 * 10
@@ -72,7 +72,7 @@ runningTotalP1 = currentTotal + runningTotalP1
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP1)
 
     # Second Player
-answer4_2 = input(name2 + ", How many Facebook friends do you have? ")
+answer4_2 = input(name2 + ", how many Facebook friends do you have? ")
 friendNum2 = int(answer4_2)
 if friendNum2 <= 500:
     currentTotal = friendNum2 // 100 * 10
@@ -97,7 +97,7 @@ while validEntry1 == False:
         validEntry1 = True
         currentTotal = 5
     else:
-        print("Invalid entry.")
+        print("I’m sorry, but you must choose Windows or iOS.")
 runningTotalP1 = currentTotal + runningTotalP1
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP1)
 
@@ -114,7 +114,7 @@ while validEntry2 == False:
         validEntry2 = True
         currentTotal = 5
     else:
-        print("Invalid entry.")
+        print("I’m sorry, but you must choose Windows or iOS..")
 runningTotalP2 = currentTotal + runningTotalP2
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP2)
 
