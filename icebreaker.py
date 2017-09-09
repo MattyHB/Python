@@ -83,11 +83,49 @@ print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runnin
 
 
 
+# 100 Version
+# Fifth Question
+    # First Player
+validEntry1 = False
+
+while validEntry1 == False:
+    confirm = input(name1 + ", what is your favorite OS? ")
+    if confirm == "Windows":
+        validEntry1 = True
+        currentTotal = 10
+    elif confirm == "iOS":
+        validEntry1 = True
+        currentTotal = 5
+    else:
+        print("Invalid entry.")
+runningTotalP1 = currentTotal + runningTotalP1
+print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP1)
 
 
+    # Second Player
+validEntry2 = False
 
+while validEntry2 == False:
+    confirm = input(name2 + ", what is your favorite OS? ")
+    if confirm == "Windows":
+        validEntry2 = True
+        currentTotal = 10
+    elif confirm == "iOS":
+        validEntry2 = True
+        currentTotal = 5
+    else:
+        print("Invalid entry.")
+runningTotalP2 = currentTotal + runningTotalP2
+print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP2
 
 # Ending Statemnet
+
+
+
+
+
+
+
 print(name1, "'s total score:", runningTotalP1)
 print(name2, "'s total score:", runningTotalP2)
 
