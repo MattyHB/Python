@@ -120,12 +120,6 @@ print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runnin
 
 # Ending Statemnet
 
-
-
-
-
-
-
 print(name1, "'s total score:", runningTotalP1)
 print(name2, "'s total score:", runningTotalP2)
 
