@@ -15,19 +15,19 @@ print("> Your turtle moves", runningTotalP2, "steps. Total steps so far:" , runn
 # Second Question
     # First Player
 answer2_1 = input(name1 + ", what is your favorite Cola? ")
-if answer2_1 == str("Coke"):
+if answer2_1 == "coke":
     currentTotal = 10
-elif answer2_1 == str("Pepsi"):
+elif answer2_1 == "pepsi":
     currentTotal = 5
 else:
     currentTotal = 3       
 runningTotalP1 = runningTotalP1 + currentTotal
-print("> Your turtle moves ", currentTotal, "steps. Total steps so far:" , runningTotalP1)
+print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP1)
     #Second Player
 answer2_2 = input(name2 + ", what is your favorite Cola? ")
-if answer2_2 == str("Coke"):
+if answer2_2 == "coke":
     currentTotal = 10
-elif answer2_2 == str("Pepsi"):
+elif answer2_2 == "pepsi":
     currentTotal = 5
 else:
     currentTotal = 3       
@@ -44,17 +44,45 @@ elif int(answer3_1) <= 5:
     currentTotal = 10
 else:
     currentTotal = -5
+runningTotalP1 = currentTotal + runningTotalP1
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP1)
 
     #Second Player
-answer3_2 = input(name2 + ",how many pairs of shoes did you bring to BJU? ")
+answer3_2 = input(name2 + ", how many pairs of shoes did you bring to BJU? ")
 if int(answer3_2) <= 2:
     currentTotal = 5
 elif int(answer3_2) <= 5:
     currentTotal = 10
 else:
     currentTotal = -5
+runningTotalP2 = currentTotal + runningTotalP2
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP2)
+
+
+# 90 version 
+# Fourth question
+    # First Player
+answer4_1 = input(name1 + ", How many Facebook friends do you have? ")
+friendNum1 = int(answer4_1)
+if friendNum1 <= 500:
+    currentTotal = friendNum1 // 100 * 10
+elif friendNum1 > 500:
+    currentTotal = friendNum1 // 500 * 5 + 25
+runningTotalP1 = currentTotal + runningTotalP1
+print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP1)
+
+    # Second Player
+answer4_2 = input(name2 + ", How many Facebook friends do you have? ")
+friendNum2 = int(answer4_2)
+if friendNum2 <= 500:
+    currentTotal = friendNum2 // 100 * 10
+elif friendNum2 > 500:
+    currentTotal = friendNum2 // 500 * 5 + 25
+runningTotalP2 = currentTotal + runningTotalP2
+print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP2)
+
+
+
 
 
 
