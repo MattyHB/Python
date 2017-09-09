@@ -116,7 +116,7 @@ while validEntry2 == False:
     else:
         print("Invalid entry.")
 runningTotalP2 = currentTotal + runningTotalP2
-print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP2
+print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP2)
 
 # Ending Statemnet
 
