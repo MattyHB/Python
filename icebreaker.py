@@ -1,15 +1,24 @@
+# -----------------------------------------------------------
+# File:   icebreaker.py
+# Author: Matt Beals  User ID: Mbeal872   Class: CPS 110
+# Desc:   This program is intended to serve as an icebreaker game for two roommates at BJU
+# ----------------------------------------------------------- 
 name1 = input("Enter the name of Player 1: ")
 name2 = input("Enter the name of Player 2: ")
+print()
 
 # First Question
     #First Player
 answer1_1 = input(name1 + "How many stuffed animals do you have? ")
 runningTotalP1 = int(answer1_1) * 3 + 5
 print("> Your turtle moves", runningTotalP1, "steps. Total steps so far:" , runningTotalP1)
-    #Second Player
+print()
+
+   #Second Player
 answer1_2 = input(name2 + "How many stuffed animals do you have?")
 runningTotalP2 = int(answer1_2) * 3 + 5
 print("> Your turtle moves", runningTotalP2, "steps. Total steps so far:" , runningTotalP2)
+print()
 
 
 # Second Question
@@ -23,7 +32,9 @@ else:
     currentTotal = 3       
 runningTotalP1 = runningTotalP1 + currentTotal
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP1)
-    #Second Player
+print()
+
+#Second Player
 answer2_2 = input(name2 + ", what is your favorite Cola? ")
 if answer2_2 == "coke":
     currentTotal = 10
@@ -33,6 +44,8 @@ else:
     currentTotal = 3       
 runningTotalP2 = runningTotalP2 + currentTotal
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP2)
+print()
+
 
 
 # Third Question
@@ -46,6 +59,8 @@ else:
     currentTotal = -5
 runningTotalP1 = currentTotal + runningTotalP1
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP1)
+print()
+
 
     #Second Player
 answer3_2 = input(name2 + ", how many pairs of shoes did you bring to BJU? ")
@@ -57,6 +72,7 @@ else:
     currentTotal = -5
 runningTotalP2 = currentTotal + runningTotalP2
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP2)
+print()
 
 
 # 90 version 
@@ -70,6 +86,8 @@ elif friendNum1 > 500:
     currentTotal = friendNum1 // 500 * 5 + 25
 runningTotalP1 = currentTotal + runningTotalP1
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP1)
+print()
+
 
     # Second Player
 answer4_2 = input(name2 + ", how many Facebook friends do you have? ")
@@ -80,6 +98,7 @@ elif friendNum2 > 500:
     currentTotal = friendNum2 // 500 * 5 + 25
 runningTotalP2 = currentTotal + runningTotalP2
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP2)
+print()
 
 
 
@@ -100,6 +119,8 @@ while validEntry1 == False:
         print("I’m sorry, but you must choose Windows or iOS.")
 runningTotalP1 = currentTotal + runningTotalP1
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP1)
+print()
+
 
 
     # Second Player
@@ -117,11 +138,14 @@ while validEntry2 == False:
         print("I’m sorry, but you must choose Windows or iOS..")
 runningTotalP2 = currentTotal + runningTotalP2
 print("> Your turtle moves", currentTotal, "steps. Total steps so far:" , runningTotalP2)
+print()
+
 
 # Ending Statemnet
-
 print(name1, "'s total score:", runningTotalP1)
 print(name2, "'s total score:", runningTotalP2)
+print()
+
 
 if int(runningTotalP1) > int(runningTotalP2):
     print("Congratulations, " + name1 + ", your turtle wins!")
