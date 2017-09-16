@@ -1,5 +1,5 @@
 # -----------------------------------------------------------
-# File:   icebreaker.py
+# File:   icebreaker.py 
 # Author: Matt Beals  User ID: Mbeal872   Class: CPS 110
 # Desc:   This program is intended to serve as an icebreaker game for two roommates at BJU
 # ----------------------------------------------------------- 
@@ -9,13 +9,13 @@ print()
 
 # First Question
     #First Player
-answer1_1 = input(name1 + "How many stuffed animals do you have? ")
+answer1_1 = input(name1 + ", how many stuffed animals do you have? ")
 runningTotalP1 = int(answer1_1) * 3 + 5
 print("> Your turtle moves", runningTotalP1, "steps. Total steps so far:" , runningTotalP1)
 print()
 
    #Second Player
-answer1_2 = input(name2 + "How many stuffed animals do you have?")
+answer1_2 = input(name2 + ", how many stuffed animals do you have? ")
 runningTotalP2 = int(answer1_2) * 3 + 5
 print("> Your turtle moves", runningTotalP2, "steps. Total steps so far:" , runningTotalP2)
 print()
