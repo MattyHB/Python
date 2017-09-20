@@ -26,14 +26,16 @@ def split(s: str, delim: str) -> (str, str):
     """
     x = s.find(delim)
     if x == -1:
-      return ('no delimiter here', '')
+      return s, ''
     else:
         first = s[:x]
         second = s[x + 1:]
-    return (first , second)
+    
+        return (first , second)
     
 
 def test_split():
     assert split('100-200', '-') == ('100' , '200')
     assert split('os/360', '/') == ('os' , '360')
     assert split('no delimiter here', '-') == ('no delimiter here','')
+    assert split('stuff ', '-') == ('stuff ','')
