@@ -61,12 +61,15 @@ def buildTableRow(airplane:str , xCoord:float , yCoord:float , heading:float , s
         #0 = ID. 1 = pic 2 = xcoord. 3= Ycoord. 4= heading. 5 = speed
     return htmlRow
 
-def test_extractData():
-    assert extractData("airplane:500.44,250.13,180,235") == ('airplane', '500.44', '250.13', '180', '235')
-    assert extractData("duck:100.15,25.2,0,550") == ('duck', '100.15', '25.2', '0', '550')
 
 def makeHtml(rows):
-    
+    """This function is used to output a string of HTML code. Once it adds "rows" it will output HTML.
+
+    Preconditions: The "rows" variable has a sting of HTML stored inside.
+    Postconditions: 
+      * Produces a fully functional HTML page stored in a string.
+      * Accurately accepts the extracted data and outputs a string of HTML code.
+    """
     return '''<html>
         <head>
             <style>
@@ -118,6 +121,15 @@ def makeHtml(rows):
 
 
 def main():  
+    """This function is the meat and potatoes of the code. Everything falls together in this function. It contains
+    all the calculations needed and a loop to accept input until there is an empty string input by the user.
+
+    Preconditions: All pervious functions are correct and ready to be used. 
+    Postconditions: 
+      * Will calculate everything in this program
+      * Will use the string of HTML code from the makeHtml function to create a file.
+      * If user inputs an empty string, I will create and print out an HTML document.
+    """
     htmrows = ''
     while True:
         userInput = input("Enter Data: ")
