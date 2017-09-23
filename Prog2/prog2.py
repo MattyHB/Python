@@ -1,73 +1,141 @@
-def main():
-    #does all the things
+ID = 0
+def split(s: str, delim: str) -> (str, str):
+    """Splits a string `s` into two parts, using `delim` as the separator character.
+
+    Preconditions: None
+    Postconditions:
+      * If `delim` is present in `s`, returns 
+         (portion of `s` before `delim`, portion of `s` after `delim`)
+      * Otherwise, returns (`s`, '')
+    """
+    x = s.find(delim)
+    if x == -1:
+      return s, ''
+    else:
+        first = s[:x]
+        second = s[x + 1:]
+    
+        return (first , second)
+
+def extractData(coords: str) -> (str, float, float, float, float):    
+    """Extracts data from a string. Seperates data into variables.
+
+    Preconditions: None
+    Postconditions:
+      * Accurately partitioned variables from string.
+    """
+
+    (airplane, coordRemainder) = split(coords, ':')
+    (xCoord, coordRemainder2) = split(coordRemainder, ',')
+    (yCoord, coordRemainder3) = split(coordRemainder2,',')
+    (heading, speed) = split(coordRemainder3,',')
+    return airplane,xCoord,yCoord,heading,speed
+
+def buildTableRow(airplane:str , xCoord:float , yCoord:float , heading:float , speed:float) -> (str):
+    """This function is used to build the individal rows within the table. This will produce the HTML output
+    needed to complete the final HTML page
+
+    Preconditions: The data has already been split and ectracted by the split and extractData functions
+    Postconditions:
+      * Accurately accepts the extracted data and outputs a string of HTML code.
+    """
+    pic = 0
+    global ID
+    ID += 1
+    if airplane == 'airplane':
+        pic = "img src='airplane.png'"
+    elif airplane == "duck":
+        pic = "img src='duck.png'"
+    elif airplane == 'helicopter':
+        pic = "img src='helicopter.png'"
+    htmlRow = '''
+        <tr>
+        <td>{0} </td>
+        <td><{1}></td>
+        <td>({2},{3})
+        </td>
+        <td>{4}</td>
+        <td>{5}</td>
+        </tr><br>\n
+        '''.format(ID, pic, xCoord, yCoord, heading, speed)
+        #0 = ID. 1 = pic 2 = xcoord. 3= Ycoord. 4= heading. 5 = speed
+    return htmlRow
+
+def test_extractData():
+    assert extractData("airplane:500.44,250.13,180,235") == ('airplane', '500.44', '250.13', '180', '235')
+    assert extractData("duck:100.15,25.2,0,550") == ('duck', '100.15', '25.2', '0', '550')
+
+def makeHtml(rows):
+    
+    return '''<html>
+        <head>
+            <style>
+                table, td, th {
+                    border: thin solid black;
+                    margin: 0px;
+                    padding: 10px;
+                    border-collapse: collapse;
+                    text-align: center;
+                    border-color: white;            
+                }
+                th {   background-color: green;  }
+                table {  display: table-inline;  }
+                body {
+                    font: arial;
+                    background: black;
+                    color: white;
+                }
+                h3 {
+                    color: green;
+                }
+            </style>
+        </head>
+        <body>
+            <div align='center'>
+            <img src='atclogo.jpg'> 
+            <h3>by Matthew Beals</h3>
+            <table>
+                <tr>
+                    <th>Id</th><th>Type</th><th>Position</th><th>Heading</th>
+                    <th>Speed</th>
+                </tr>''' + rows + '''
+    
+            </table>
+            <br><br>
+            </div>
+
+        <p><i>Tips:
+        <ul>
+        <li> Right-click this page when viewing it in Chrome or Firefox and choose View Page Source to see the HTML you need to generate.</li>
+        <li>Right-click each image and choose <b>"Save image as"</b> to download to your computer.
+        </ul>
+        </i></p>
+        </body>
+        </html>'''
+
+
+
+
+
+def main():  
+    htmrows = ''
+    while True:
+        userInput = input("Enter Data: ")
+
+        if userInput == '':
+            break
+        else:
+            airplane, xCoord, yCoord, heading, speed = extractData(userInput)
+            row = buildTableRow(airplane, xCoord, yCoord, heading, speed)
+            htmrows += row 
+
+
+    outFile = open("output.html", "w")
+    outFile.write(makeHtml(htmrows))
+    outFile.close()
+
+    print("Generating File...")
+
 
 if __name__ == "__main__":
-    main()
-
-
-
-def extractData(coords: str) -> (str, float, float, float, float)
-    
-
-
-
-
-# For duck, ID 1, starting at (100,25) heading 0, speed 250.
-#<tr>
-#<td>1 </td>
-#<td><img src='duck.png'></td>
-#<td>(100,25)
-#</td>
-#<td>0</td>
-#<td>550</td>
-#</tr>
-
-
-
-htmlPage = '''<html>
-    <head>
-        <style>
-            table, td, th {
-                border: thin solid black;
-                margin: 0px;
-                padding: 10px;
-                border-collapse: collapse;
-                text-align: center;
-                border-color: white;            
-            }
-            th {   background-color: green;  }
-            table {  display: table-inline;  }
-            body {
-                font: arial;
-                background: black;
-                color: white;
-            }
-            h3 {
-                color: green;
-            }
-        </style>
-    </head>
-    <body>
-        <div align='center'>
-        <img src='atclogo.jpg'> 
-        <h3>by Matthew Beals</h3>
-        <table>
-            <tr>
-                <th>Id</th><th>Type</th><th>Position</th><th>Heading</th>
-                <th>Speed</th>
-            </tr>
-  
-    {0}
-
-        </table>
-        <br><br>
-        </div>
-
-    <p><i>Tips:
-    <ul>
-    li> Right-click this page when viewing it in Chrome or Firefox and choose View Page Source to see the HTML you need to generate.</li>
-    <li>Right-click each image and choose <b>"Save image as"</b> to download to your computer.
-    </ul>
-    </i></p>
-    </body>
-    </html>
+    main()   

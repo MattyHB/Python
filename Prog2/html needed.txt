@@ -1,4 +1,4 @@
-<html>
+htmlPage = '''<html>
     <head>
         <style>
             table, td, th {
@@ -24,49 +24,24 @@
     <body>
         <div align='center'>
         <img src='atclogo.jpg'> 
-        <h3>by Stephen Schaub</h3>
+        <h3>by Matthew Beals</h3>
         <table>
             <tr>
                 <th>Id</th><th>Type</th><th>Position</th><th>Heading</th>
                 <th>Speed</th>
             </tr>
   
-<tr>
-<td>1 </td>
-<td><img src='duck.png'></td>
-<td>(100,25)
-</td>
-<td>0</td>
-<td>550</td>
-</tr>
-<tr>
-<td>2 </td>
-<td><img src='airplane.png'></td>
-<td>(500,250)
-</td>
-<td>180</td>
-<td>235</td>
-</tr>
-<tr>
-<td>3 </td>
-<td><img src='helicopter.png'></td>
-<td>(35,400)
-</td>
-<td>90</td>
-<td>300</td>
-</tr>
+    {0}
 
         </table>
         <br><br>
         </div>
 
-<p><i>Tips:
-<ul>
-  <li> Right-click this page when viewing it in Chrome or Firefox and choose View Page Source to see the HTML you need to generate.</li>
-  <li>Right-click each image and choose <b>"Save image as"</b> to download to your computer.
-</ul>
-</i></p>
-</body>
-</html>
-
-  
+    <p><i>Tips:
+    <ul>
+    li> Right-click this page when viewing it in Chrome or Firefox and choose View Page Source to see the HTML you need to generate.</li>
+    <li>Right-click each image and choose <b>"Save image as"</b> to download to your computer.
+    </ul>
+    </i></p>
+    </body>
+    </html>
