@@ -43,25 +43,20 @@ def buildTableRow(airplane:str , xCoord:float , yCoord:float , heading:float , s
     Postconditions:
       * Accurately accepts the extracted data and outputs a string of HTML code.
     """
-    pic = 0
+    
     global ID
     ID += 1
-    if airplane == 'airplane':
-        pic = "img src='airplane.png'"
-    elif airplane == "duck":
-        pic = "img src='duck.png'"
-    elif airplane == 'helicopter':
-        pic = "img src='helicopter.png'"
+    
     htmlRow = '''
 <tr>
   <td>{0} </td>
-  <td><{1}></td>
+  <td><imgsrc='{1}.png'></td>
   <td>({2},{3})
   </td>
   <td>{4}</td>
   <td>{5}</td>
 </tr>\n
-        '''.format(ID, pic, xCoord, yCoord, heading, speed)
+        '''.format(ID, airplane, xCoord, yCoord, heading, speed)
         #0 = ID. 1 = pic 2 = xcoord. 3= Ycoord. 4= heading. 5 = speed
     return htmlRow
 
