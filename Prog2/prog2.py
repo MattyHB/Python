@@ -29,6 +29,10 @@ def extractData(coords: str) -> (str, float, float, float, float):
     (xCoord, coordRemainder2) = split(coordRemainder, ',')
     (yCoord, coordRemainder3) = split(coordRemainder2,',')
     (heading, speed) = split(coordRemainder3,',')
+    xCoord = float(xCoord)
+    xCoord = round(xCoord)
+    yCoord = float(yCoord)
+    yCoord = round(yCoord)
     return airplane,xCoord,yCoord,heading,speed
 
 def buildTableRow(airplane:str , xCoord:float , yCoord:float , heading:float , speed:float) -> (str):
@@ -56,7 +60,7 @@ def buildTableRow(airplane:str , xCoord:float , yCoord:float , heading:float , s
         </td>
         <td>{4}</td>
         <td>{5}</td>
-        </tr><br>\n
+        </tr>\n
         '''.format(ID, pic, xCoord, yCoord, heading, speed)
         #0 = ID. 1 = pic 2 = xcoord. 3= Ycoord. 4= heading. 5 = speed
     return htmlRow
@@ -70,6 +74,7 @@ def makeHtml(rows):
       * Produces a fully functional HTML page stored in a string.
       * Accurately accepts the extracted data and outputs a string of HTML code.
     """
+    
     return '''<html>
         <head>
             <style>
@@ -142,7 +147,7 @@ def main():
             htmrows += row 
 
 
-    outFile = open("output.html", "w")
+    outFile = open("atc.html", "w")
     outFile.write(makeHtml(htmrows))
     outFile.close()
 
