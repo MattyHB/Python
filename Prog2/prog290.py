@@ -60,7 +60,8 @@ def buildTableRow(airplane:str , xCoord:float , yCoord:float , heading:float , s
   </td>
   <td>{4}</td>
   <td>{5}</td>
-</tr>'''.format(ID, pic, xCoord, yCoord, heading, speed)
+</tr>\n
+        '''.format(ID, pic, xCoord, yCoord, heading, speed)
         #0 = ID. 1 = pic 2 = xcoord. 3= Ycoord. 4= heading. 5 = speed
     return htmlRow
 
@@ -106,7 +107,10 @@ def makeHtml(rows):
               <tr>
                   <th>Id</th><th>Type</th><th>Position</th><th>Heading</th>
                   <th>Speed</th>
-              </tr>''' + rows + '''
+              </tr>
+    
+''' + rows + '''
+
           </table>
           <br><br>
           </div>
