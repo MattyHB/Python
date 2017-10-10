@@ -167,7 +167,19 @@ def toAssembly(instr: int) -> str:
     return final
 
 def encode(asm: str) -> int:
-    
+    #
+    #Write some documentations
+
+
+
+
+
+
+
+
+
+
+
     if " " in asm:
         opcode, operand = asm.split(" ")
         
@@ -187,7 +199,15 @@ def encode(asm: str) -> int:
     
     return final
 
+def assemble(program: str)-> (list,list):
+    
+    codes = []
+    errors = []
+    
+    for line in program.split('\n')
+        codes.append(encode(line))
 
+    return codes , errors
 
 
 def disassemble(start: int, end: int):
