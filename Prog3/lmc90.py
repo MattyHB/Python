@@ -20,6 +20,7 @@ BRA = 5
 BRZ = 6
 INP = 7
 OUT = 8
+names = ["HLT", "ADD", "SUB", "STA", 'LDA', "BRA", "BRZ", "INP", "OUT"]
 
 
 # ---------------- LMC Component Interfaces ------------------
@@ -57,8 +58,11 @@ def writePC(val: int):
         pc = val
 
 def readInbox():
-    """TODO: Removes and returns first number from inbox. If inbox is empty, returns 0."""
-    return 0
+    """Removes and returns first number from inbox. If inbox is empty, returns 0."""
+    global inbox
+    if len(inbox) == 0:
+        return 0
+    return inbox.pop(0)
 
 def writeOutbox(val: int):
     """Places `val` at end of outbox"""
@@ -86,10 +90,24 @@ def execute(opcode: int, operand: int):
         writeAccum(readMem(operand))
     elif opcode == HLT:
         running = False
+    elif opcode == ADD:
+        writeAccum(readAccum() + readMem(operand))
+    elif opcode == SUB:
+        writeAccum(readAccum() - readMem(operand))
+    elif opcode == STA:
+        writeMem(operand, readAccum())
+    elif opcode == BRA:
+        writePC(operand)
+    elif opcode == BRZ:
+        if readAccum() == 0:
+            writePC(operand)
+    elif opcode == INP:
+        writeAccum(readInbox())
 
 def step():
     """Performs one fetch-decode-execute step"""
     instr = fetch()
+    
     (opcode, operand) = decode(instr)
     execute(opcode, operand)
 
@@ -117,66 +135,59 @@ def load(program: list, indata: list):
     for i in range(len(program)):
         writeMem(i, program[i])
     inbox = indata
+    print()
 
 # ---------------- Simulator "display" ----------------------
 
 def dump():
-    """TODO: Displays the state of memory/CPU"""
-   #WAAAATTT?
-    i = 0
-    while i < 100:
-        print(i + memory[i])
-        i += 1
-    print("Please implement me!")
+    """ Displays the state of memory/CPU"""
+    print()
+    for i in range(0, 10):
+        row = ''
+        for j in range(0, 10):
+            row += "{index:2}[{loc:<3}] ".format(index= i * 10 + j, loc = readMem(i * 10 + j))
+        
+        print(row)
+    thirdLast = ' ' * 32 + "PC[{P:<2}] ACC[{A:<3}] {toa}".format(P = readPC(), A = readAccum(), toa = toAssembly(readMem(pc)))
+    print(thirdLast)
+    print()
+    secondLast = "In Box: " + str(inbox)
+    print(secondLast)
+    last= "Out Box: " + str(outbox)
+    print(last)
+    print()
+
 
 def toAssembly(instr: int) -> str:
-    """TODO: Returns assembly language translation of machine language instruction `instr`"""
-    (command, locNum) = (instr // 100, instr % 100)
-    locNum = str(locNum)
-    
-    assemblyPossible = [HLT, ADD, SUB, STA, LDA, BRA, BRZ, INP, OUT]
-    
-    '''if command == 1:
-        command = "ADD "
-    if command == 2:
-        command = 'SUB '
-    if command == 3:
-        command = 'STA '
-    if command == 5:
-        command = 'LDA '
-    if command == 6:
-        command = 'BRA '
-    if command == 7:
-        command = "BRZ "
-    final = (str(command) + str(locNum))
-    if command == 9 and locNum == '1':
-        final = 'INP'
-    if command == 9 and locNum == '2':
-        final = 'OUT'
-    if command == 0:
-        final = 'HLT'
-    if locNum[0] == '0':
-        locNum = locNum[:1]'''
+    """ Returns assembly language translation of machine language instruction `instr`"""
+    opcode, operand = decode(instr)
+    final = names[opcode]
+    if opcode > 0 and opcode < 7:
+        final += ' ' + str(operand) 
     return final
 
-def test_toAssembly():
-    assert toAssembly(189) == "ADD 89"
-    assert toAssembly(232) == "SUB 32"
-    assert toAssembly(323) == "STA 23"
-    assert toAssembly(501) == "LDA 1"
-    assert toAssembly(622) == "BRA 22"
-    assert toAssembly(743) == 'BRZ 43'
-    assert toAssembly(901) == 'INP'
-    assert toAssembly(902) == 'OUT'
-    assert toAssembly(000) == 'HLT'
+def encode(asm: str) -> int:
+    
+    opcode, operand = asm.split(" ")
+    
+    for i in names:
+        if opcode == names[i]:
+            converted = opcode * 100
+        i += 1
+
+
+    
+    return opcode + converted
+
+
 
 
 def disassemble(start: int, end: int):
     """Displays assembly language listing of memory contents `start` to `end`"""
     for addr in range(start, end + 1):
         print(str(addr).rjust(2) + ": " + toAssembly(readMem(addr)))
-
-# ----------- Define shortcut names for interacti ve use
+    print()
+# ----------- Define shortcut names for interactive use
 
 def sd():
     step()
@@ -213,6 +224,53 @@ def test_OUT():
     execute(OUT, 0)
     assert outbox == [3]
 
+def test_toAssembly():
+    assert toAssembly(189) == "ADD 89"
+    assert toAssembly(232) == "SUB 32"
+    assert toAssembly(323) == "STA 23"
+    assert toAssembly(401) == "LDA 1"
+    assert toAssembly(522) == "BRA 22"
+    assert toAssembly(643) == 'BRZ 43'
+    assert toAssembly(701) == 'INP'
+    assert toAssembly(802) == 'OUT'
+    assert toAssembly(000) == 'HLT'
+
+def test_exe():
+    reset()
+    load([2,3,4,5,6,7,8,9,0,1], [])
+    execute(ADD, 0)
+    assert readAccum() == 2
+    execute(ADD, 3)
+    assert readAccum() == 7
+    execute(SUB, 4)
+    assert readAccum() == 1
+    execute(STA, 8)
+    assert readMem(8) == 1
+    execute(BRA, 4)
+    assert readPC() == 4
+    execute(BRZ, 9)
+    assert readAccum() == 1
+    writeAccum(0)
+    execute(BRZ, 4)
+    assert readPC() == 4
+    reset()
+    load([1,2,3,4,5], [2, 3, 4])
+    execute(INP, 0)
+    assert readAccum() == 2
+    assert inbox == [3, 4]
+
+def test_readInbox():
+    global inbox
+    inbox = [1,2,3,4,5,6,7,8]
+    assert readInbox() == 1
+    assert inbox == [2,3,4,5,6,7,8]
+    assert readInbox() == 2
+    assert inbox == [3,4,5,6,7,8]
+
+# Multiply two numbers
+# mattprog = [700, 399, 700, 398, 499, 613, 497, 198, 397, 499, 216, 399, 504, 497, 800, 0, 1]
+# load(mattprog, [5,12])
 
 if __name__ == "__main__":
     reset()
+    

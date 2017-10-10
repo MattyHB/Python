@@ -106,6 +106,7 @@ def execute(opcode: int, operand: int):
 def step():
     """Performs one fetch-decode-execute step"""
     instr = fetch()
+    
     (opcode, operand) = decode(instr)
     execute(opcode, operand)
 
@@ -250,6 +251,10 @@ def test_readInbox():
     assert readInbox() == 2
     assert inbox == [3,4,5,6,7,8]
 
+# Multiply two numbers
+# mattprog = [700, 399, 700, 398, 499, 613, 497, 198, 397, 499, 216, 399, 504, 497, 800, 0, 1]
+# load(mattprog, [5,12])
 
 if __name__ == "__main__":
     reset()
+    
