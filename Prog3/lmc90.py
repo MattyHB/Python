@@ -172,7 +172,9 @@ def encode(asm: str) -> int:
             Postconditions:
     '''
     opcode, operand = asm.split(" ")
-    operand = int(operand)  
+    operand = int(operand)
+    if opcode == 'HLT':
+        return 000
     if opcode == 'DAT':
         return operand
     elif opcode not in names:
@@ -189,10 +191,15 @@ def assemble(program:str)-> (list, list):
     '''
     codes = []
     errors = []
-    
-    for line in program.split('\n')
-        codes.append(encode(line))
-
+    for line in program.split('\n'):
+        if line.find('//') == 0:
+            continue
+        if line == '':
+            continue
+        if encode(line) == -1:
+            errors.append(line)
+        else:
+            codes.append(encode(line))
     return codes , errors 
 
 def disassemble(start: int, end: int):
@@ -249,6 +256,17 @@ def test_toAssembly():
     assert toAssembly(000) == 'HLT'
 
 def test_encode():
+    assert encode('DAT 8') == 8
+    assert encode('HLT 1') == 000
+    assert encode('ADD 2') == 102
+    assert encode('SUB 3') == 203
+    assert encode('STA 4') == 304
+    assert encode('LDA 5') == 405
+    assert encode('BRA 6') == 506
+    assert encode('BRZ 7') == 607
+    assert encode('INP 8') == 708
+    assert encode('OUT 9') == 809
+    
 
 def test_exe():
     reset()
@@ -285,6 +303,25 @@ def test_readInbox():
 # Multiply two numbers
 # mattprog = [700, 399, 700, 398, 499, 613, 497, 198, 397, 499, 216, 399, 504, 497, 800, 0, 1]
 # load(mattprog, [5,12])
+multiply = """
+INP
+STA 99
+INP
+STA 98
+LDA 99
+BRZ 13
+LDA 97
+ADD 98
+STA 97
+LDA 99
+SUB 16
+STA 99
+BRA 4
+LDA 97
+OUT
+HLT
+DAT 1
+"""
 
 if __name__ == "__main__":
     reset()
