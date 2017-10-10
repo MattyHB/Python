@@ -171,18 +171,23 @@ def encode(asm: str) -> int:
             Precondition:
             Postconditions:
     '''
-    opcode, operand = asm.split(" ")
-    operand = int(operand)
-    if opcode == 'HLT':
-        return 000
-    if opcode == 'DAT':
-        return operand
-    elif opcode not in names:
-        return -1
-    for num, name in enumerate(names):
-        if opcode == name:
-            converted = num * 100
-    return converted + operand
+    if ' ' not in asm:
+        for num, name in enumerate(names):
+            if asm == name:
+                converted = num * 100
+        return converted 
+    else:
+        opcode, operand = asm.split(" ")
+        operand = int(operand)
+        
+        if opcode == 'DAT':
+            return operand
+        elif opcode not in names:
+            return -1
+        for num, name in enumerate(names):
+            if opcode == name:
+                converted = num * 100
+        return converted + operand
 
 def assemble(program:str)-> (list, list):
     '''
@@ -207,6 +212,10 @@ def disassemble(start: int, end: int):
     for addr in range(start, end + 1):
         print(str(addr).rjust(2) + ": " + toAssembly(readMem(addr)))
     print()
+
+def loadAssembly(program: str, indata: str):
+    
+
 # ----------- Define shortcut names for interactive use
 
 def sd():
@@ -257,15 +266,15 @@ def test_toAssembly():
 
 def test_encode():
     assert encode('DAT 8') == 8
-    assert encode('HLT 1') == 000
+    assert encode('HLT') == 0
     assert encode('ADD 2') == 102
     assert encode('SUB 3') == 203
     assert encode('STA 4') == 304
     assert encode('LDA 5') == 405
     assert encode('BRA 6') == 506
     assert encode('BRZ 7') == 607
-    assert encode('INP 8') == 708
-    assert encode('OUT 9') == 809
+    assert encode('INP') == 700
+    assert encode('OUT') == 800
     
 
 def test_exe():
