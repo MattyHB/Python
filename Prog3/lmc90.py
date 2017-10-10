@@ -167,6 +167,7 @@ def toAssembly(instr: int) -> str:
     return final
 
 def encode(asm: str) -> int:
+<<<<<<< HEAD
     '''Encodes an assembly language instruction into a machine language instruction
             Precondition:
             Postconditions:
@@ -183,8 +184,49 @@ def encode(asm: str) -> int:
         if opcode == name:
             converted = num * 100
     return converted + operand
+=======
+    #
+    #Write some documentations
 
 
+
+
+
+
+
+
+
+
+
+    if " " in asm:
+        opcode, operand = asm.split(" ")
+        
+        if opcode == 'DAT':
+            return int(operand)
+        if opcode not in names:
+            return -1
+        opcode = names.index(opcode)
+        opcode = int(opcode) * 100
+        final = opcode + int(operand)
+    else:
+        if asm not in names:
+            return -1
+        opcode = names.index(asm)
+        opcode = int(opcode) * 100
+        final = opcode
+    
+    return final
+>>>>>>> fcc87d05e99cc76e662b68963bcfadffc8cc1943
+
+def assemble(program: str)-> (list,list):
+    
+    codes = []
+    errors = []
+    
+    for line in program.split('\n')
+        codes.append(encode(line))
+
+    return codes , errors
 
 
 def disassemble(start: int, end: int):
