@@ -167,17 +167,22 @@ def toAssembly(instr: int) -> str:
     return final
 
 def encode(asm: str) -> int:
-    
+    '''Encodes an assembly language instruction into a machine language instruction
+            Precondition:
+            Postconditions:
+    '''
     opcode, operand = asm.split(" ")
+    operand = int(operand)
     
-    for i in names:
-        if opcode == names[i]:
-            converted = opcode * 100
-        i += 1
+    if opcode == 'DAT':
+        return operand
+    elif opcode not in names:
+        return -1
 
-
-    
-    return opcode + converted
+    for num, name in enumerate(names):
+        if opcode == name:
+            converted = num * 100
+    return converted + operand
 
 
 
