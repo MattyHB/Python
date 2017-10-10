@@ -168,16 +168,24 @@ def toAssembly(instr: int) -> str:
 
 def encode(asm: str) -> int:
     
-    opcode, operand = asm.split(" ")
+    if " " in asm:
+        opcode, operand = asm.split(" ")
+        
+        if opcode == 'DAT':
+            return int(operand)
+        if opcode not in names:
+            return -1
+        opcode = names.index(opcode)
+        opcode = int(opcode) * 100
+        final = opcode + int(operand)
+    else:
+        if asm not in names:
+            return -1
+        opcode = names.index(asm)
+        opcode = int(opcode) * 100
+        final = opcode
     
-    for i in names:
-        if opcode == names[i]:
-            converted = opcode * 100
-        i += 1
-
-
-    
-    return opcode + converted
+    return final
 
 
 
