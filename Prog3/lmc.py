@@ -156,7 +156,27 @@ def dump():
     last= "Out Box: " + str(outbox)
     print(last)
     print()
+    dumpForWeb()
 
+def dumpForWeb():
+    '''Converts the contents of dump to a string'''
+    string = ''
+    string += '/n'
+    for i in range(0, 10):
+        row = ''
+        for j in range(0, 10):
+            row += "{index:2}[{loc:<3}] ".format(index= i * 10 + j, loc = readMem(i * 10 + j))
+        
+        string+= row
+    thirdLast = ' ' * 32 + "PC[{P:<2}] ACC[{A:<3}] {toa}".format(P = readPC(), A = readAccum(), toa = toAssembly(readMem(pc)))
+    string += thirdLast
+    string += '/n'
+    secondLast = "In Box: " + str(inbox)
+    string += secondLast
+    last= "Out Box: " + str(outbox)
+    string += last
+    string += '/n'
+    print(string)
 
 def toAssembly(instr: int) -> str:
     """ Returns assembly language translation of machine language instruction `instr`"""
