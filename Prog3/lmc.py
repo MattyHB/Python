@@ -20,6 +20,7 @@ BRA = 5
 BRZ = 6
 INP = 7
 OUT = 8
+names = ["HLT", "ADD", "SUB", "STA", 'LDA', "BRA", "BRZ", "INP", "OUT"]
 
 
 # ---------------- LMC Component Interfaces ------------------
@@ -159,18 +160,80 @@ def dump():
 
 def toAssembly(instr: int) -> str:
     """ Returns assembly language translation of machine language instruction `instr`"""
-    names = ["HLT", "ADD", "SUB", "STA", 'LDA', "BRA", "BRZ", "INP", "OUT"]
     opcode, operand = decode(instr)
     final = names[opcode]
     if opcode > 0 and opcode < 7:
         final += ' ' + str(operand) 
     return final
 
+def encode(asm: str) -> int:
+    '''Encodes one assembly language instruction into a machine language instruction
+            Precondition: None
+            Postconditions: Returns machine language code in the form of an integer.
+    '''
+
+    asm = asm.rstrip()
+    if ' ' not in asm:
+        for num, name in enumerate(names):
+            if asm == name:
+                num = num * 100
+                return num
+        return -1
+    else:
+        opcode, operand = asm.split(" ")
+        operand = int(operand)
+        
+        if opcode == 'DAT':
+            return operand
+        elif opcode not in names:
+            return -1
+        for num, name in enumerate(names):
+            if opcode == name:
+                converted = num * 100
+        return converted + operand
+
+def assemble(program:str)-> (list, list):
+    ''' Takes a long string of machine language code and transforms it into an assembly language list of instructions with a second list to catch all errors.
+        Preconditions: None
+        Postconditions: Returns two lists, one assembly code and one for errors.
+    '''
+    codes = []
+    errors = []
+    for line in program.split('\n'):
+        if line.find('//') > -1:
+            line = line[0:line.find('//')]
+        if line == '':
+            continue
+        if encode(line) == -1:
+            errors.append(line)
+        else:
+            codes.append(encode(line))
+    return codes , errors 
+
 def disassemble(start: int, end: int):
     """Displays assembly language listing of memory contents `start` to `end`"""
     for addr in range(start, end + 1):
         print(str(addr).rjust(2) + ": " + toAssembly(readMem(addr)))
     print()
+
+def loadAssembly(program: str, indata: str):
+    '''Loads `program` into the `memory` and `indata` into the`inbox`
+            Preconditions: None
+            Postconditions: Program has been loaded into 'memory`
+                            `indata` has been moved into the `inbox`'''
+    (loaded, errors) = assemble(program)
+    
+    data = []
+    for i in indata.split(","):
+        data.append(int(i))
+    if errors == []:    
+        load(loaded, data)
+    else:
+        print('The following instructions failed to assemble:')
+        for i in errors:
+            print(i)
+        
+
 # ----------- Define shortcut names for interactive use
 
 def sd():
@@ -219,6 +282,19 @@ def test_toAssembly():
     assert toAssembly(802) == 'OUT'
     assert toAssembly(000) == 'HLT'
 
+def test_encode():
+    assert encode('DAT 8') == 8
+    assert encode('HLT') == 0
+    assert encode('ADD 2') == 102
+    assert encode('SUB 3') == 203
+    assert encode('STA 4') == 304
+    assert encode('LDA 5') == 405
+    assert encode('BRA 6') == 506
+    assert encode('BRZ 7') == 607
+    assert encode('INP') == 700
+    assert encode('OUT') == 800
+    
+
 def test_exe():
     reset()
     load([2,3,4,5,6,7,8,9,0,1], [])
@@ -252,9 +328,27 @@ def test_readInbox():
     assert inbox == [3,4,5,6,7,8]
 
 # Multiply two numbers
-# mattprog = [700, 399, 700, 398, 499, 613, 497, 198, 397, 499, 216, 399, 504, 497, 800, 0, 1]
-# load(mattprog, [5,12])
+multiply = """
+INP
+STA 99
+INP
+STA 98
+LDA 99
+BRZ 13
+LDA 97
+ADD 98
+STA 97
+LDA 99
+SUB 16
+STA 99
+BRA 4
+LDA 97
+OUT
+HLT
+DAT 1
+"""
 
 if __name__ == "__main__":
     reset()
+    
     
