@@ -167,15 +167,18 @@ def toAssembly(instr: int) -> str:
     return final
 
 def encode(asm: str) -> int:
-    '''Encodes an assembly language instruction into a machine language instruction
-            Precondition:
-            Postconditions:
+    '''Encodes one assembly language instruction into a machine language instruction
+            Precondition: None
+            Postconditions: Returns machine language code in the form of an integer.
     '''
+
+    asm = asm.rstrip()
     if ' ' not in asm:
         for num, name in enumerate(names):
             if asm == name:
-                converted = num * 100
-        return converted 
+                num = num * 100
+                return num
+        return -1
     else:
         opcode, operand = asm.split(" ")
         operand = int(operand)
@@ -190,15 +193,15 @@ def encode(asm: str) -> int:
         return converted + operand
 
 def assemble(program:str)-> (list, list):
-    '''
-        Pre
-        Post
+    ''' Takes a long string of machine language code and transforms it into an assembly language list of instructions with a second list to catch all errors.
+        Preconditions: None
+        Postconditions: Returns two lists, one assembly code and one for errors.
     '''
     codes = []
     errors = []
     for line in program.split('\n'):
-        if line.find('//') == 0:
-            continue
+        if line.find('//') > -1:
+            line = line[0:line.find('//')]
         if line == '':
             continue
         if encode(line) == -1:
@@ -214,7 +217,22 @@ def disassemble(start: int, end: int):
     print()
 
 def loadAssembly(program: str, indata: str):
+    '''Loads `program` into the `memory` and `indata` into the`inbox`
+            Preconditions: None
+            Postconditions: Program has been loaded into 'memory`
+                            `indata` has been moved into the `inbox`'''
+    (loaded, errors) = assemble(program)
     
+    data = []
+    for i in indata.split(","):
+        data.append(int(i))
+    if errors == []:    
+        load(loaded, data)
+    else:
+        print('The following instructions failed to assemble:')
+        for i in errors:
+            print(i)
+        
 
 # ----------- Define shortcut names for interactive use
 
@@ -310,8 +328,6 @@ def test_readInbox():
     assert inbox == [3,4,5,6,7,8]
 
 # Multiply two numbers
-# mattprog = [700, 399, 700, 398, 499, 613, 497, 198, 397, 499, 216, 399, 504, 497, 800, 0, 1]
-# load(mattprog, [5,12])
 multiply = """
 INP
 STA 99
@@ -334,4 +350,5 @@ DAT 1
 
 if __name__ == "__main__":
     reset()
+    
     
