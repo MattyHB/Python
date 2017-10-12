@@ -19,7 +19,7 @@ The_HTML = '''<html>
 
 </html>''' 
 
-@bottle.route('/')
+@bottle.route('/lmc')
 def welcome():
     
     if 'action' in bottle.request.params:
@@ -30,9 +30,6 @@ def welcome():
             lmc.run()
         elif action == 'Load':
             errors = lmc.loadAssembly(bottle.request.params['program'], bottle.request.params['inbox'])
-
-
-            
     return The_HTML.format(lmc.dumpForWeb())
     
 # Launch the BottlePy dev server
