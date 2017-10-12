@@ -219,7 +219,14 @@ def assemble(program:str)-> (list, list):
     '''
     codes = []
     errors = []
-    for line in program.split('\n'):
+    instruction_list = []
+
+    if '\r' in program:
+        instruction_list = program.split("\r\n")
+    else:
+        instruction_list = program.split("\n")
+
+    for line in instruction_list:
         if line.find('//') > -1:
             line = line[0:line.find('//')]
         if line == '':

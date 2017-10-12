@@ -21,36 +21,7 @@ The_HTML = '''<html>
 
 @bottle.route('/')
 def welcome():
-    reDump = lmc.dumpForWeb()
-
-    if 'program' in bottle.request.params:
-        finalProg = []
-        program = bottle.request.params['program']
-        if '\\n' in program:
-            program = program.split('\\n')
-        if '\\r' in program:
-            program = program.split('\\r')
-        if '\n' in program:
-            program = program.split('\n')
-        if '\r' in program:
-            program = program.split('\r')
-        #program = program.split('%0D%0A')
-
-        for i in program:
-            finalProg.append(i)
-        print(finalProg)
-
-    if 'inbox' in bottle.request.params:
-        finalInbox = []
-        inbox = bottle.request.params['inbox']
-        #inbox = inbox.split('%2C')
-        inbox = inbox.split(',')
-        for i in inbox:
-            i = int(i)
-            finalInbox.append(i)
-        print(finalInbox)
-        
-
+    
     if 'action' in bottle.request.params:
         action = bottle.request.params['action']
         if action == 'Step':
@@ -58,13 +29,11 @@ def welcome():
         elif action == 'Run':
             lmc.run()
         elif action == 'Load':
-            lmc.load(finalProg, finalInbox)
+            errors = lmc.loadAssembly(bottle.request.params['program'], bottle.request.params['inbox'])
+
+
+            
+    return The_HTML.format(lmc.dumpForWeb())
     
-
-    
-    return The_HTML.format(reDump)
-
-
-
 # Launch the BottlePy dev server
 bottle.run(host='localhost', debug=True)
