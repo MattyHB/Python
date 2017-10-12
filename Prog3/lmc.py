@@ -25,14 +25,14 @@ names = ["HLT", "ADD", "SUB", "STA", 'LDA', "BRA", "BRZ", "INP", "OUT"]
 
 # ---------------- LMC Component Interfaces ------------------
 
-def readMem(addr: list):
+def readMem(addr: int) -> int:
     """Returns value at address `addr` in memory, or 0 if `addr` is out of range"""
     if 0 <= addr < len(memory):
         return memory[addr]
     else:
         return 0
 
-def writeMem(addr: int, val: list):
+def writeMem(addr: int, val: int):
     """Writes `val` to memory cell at address `addr`"""
     if 0 <= addr < len(memory) and 0 <= val <= 999:
         memory[addr] = val
@@ -161,7 +161,6 @@ def dump():
 def dumpForWeb():
     '''Converts the contents of dump to a string'''
     string = ''
-    string += '\n'
     for i in range(0, 10):
         row = ''
         for j in range(0, 10):
@@ -172,11 +171,12 @@ def dumpForWeb():
     string += thirdLast
     string += '\n'
     secondLast = "In Box: " + str(inbox)
-    string += secondLast
+    string += secondLast + '\n'
     last= "Out Box: " + str(outbox)
     string += last
     string += '\n'
-    print(string)
+    
+    return string
 
 def toAssembly(instr: int) -> str:
     """ Returns assembly language translation of machine language instruction `instr`"""
