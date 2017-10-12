@@ -22,7 +22,6 @@ INP = 7
 OUT = 8
 names = ["HLT", "ADD", "SUB", "STA", 'LDA', "BRA", "BRZ", "INP", "OUT"]
 
-
 # ---------------- LMC Component Interfaces ------------------
 
 def readMem(addr: int) -> int:
@@ -320,7 +319,6 @@ def test_encode():
     assert encode('BRZ 7') == 607
     assert encode('INP') == 700
     assert encode('OUT') == 800
-    
 
 def test_exe():
     reset()

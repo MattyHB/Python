@@ -21,7 +21,6 @@ The_HTML = '''<html>
 
 @bottle.route('/lmc')
 def welcome():
-    
     if 'action' in bottle.request.params:
         action = bottle.request.params['action']
         if action == 'Step':
