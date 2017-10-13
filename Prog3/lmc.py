@@ -352,28 +352,6 @@ def test_readInbox():
     assert readInbox() == 2
     assert inbox == [3,4,5,6,7,8]
 
-# Multiply two numbers
-multiply = """
-INP
-STA 99
-INP
-STA 98
-LDA 99
-BRZ 13
-LDA 97
-ADD 98
-STA 97
-LDA 99
-SUB 16
-STA 99
-BRA 4
-LDA 97
-OUT
-HLT
-DAT 1
-"""
 
 if __name__ == "__main__":
     reset()
-    
-    
