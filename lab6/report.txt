@@ -1,0 +1,2 @@
+python3 findword.py verse.txt Lord > results.txt
+python3 findword.py verse.txt the < verse.txt > results2.txt

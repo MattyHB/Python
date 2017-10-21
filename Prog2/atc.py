@@ -2,7 +2,7 @@
 # File:   atc.py 
 # Author: Matt Beals  User ID: Mbeal872   Class: CPS 110
 # Desc:   This program will create an HTML file that will display a chart based on user input that will 
-#               provide a visual representation of the users data in the HTML file. The data will be based around an "Air Traffic Controller" theme.
+# provide a visual representation of the users data in the HTML file. The data will be based around an "Air Traffic Controller" theme.
 # ----------------------------------------------------------- 
 ID = 0
 def split(s: str, delim: str) -> (str, str):
