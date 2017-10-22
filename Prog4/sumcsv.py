@@ -13,10 +13,11 @@ csvread = csv.reader(csvFile)
 
 fileDic = {}
 
-
+column1 = sys.argv[2]
 
 for item in fileDic:
-    print(item)
+    if column1 in fileDic:
+        fileDic[column1] = fileDic[column1] + float()
 
 
 
