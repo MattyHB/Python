@@ -3,7 +3,7 @@ import webbrowser
 
 totalBreaks = 3
 breakCount = 0
-time = time.ctime
+time = time.ctime()
 num = 10
 
 print("The program started at" , time)

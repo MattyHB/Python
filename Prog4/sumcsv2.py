@@ -1,11 +1,12 @@
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
-# File: sumcsv.py
+# File: sumcsv2.py
 # Author: Matthew Beals User ID: Mbeal872 Class: CPS 110
-# Desc: This program makes a filter type option for CSV files.
-# It will take two columns and display them.
+# Desc: This program continues the sumcsv.py file
+#this program also handles .xlsx file formats and can read and write
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 import sys
 import csv
+import openpyxl
 
 if len(sys.argv) != 4:
     print("Usage: python sumcsv.py csv-filename item-column count-column")
