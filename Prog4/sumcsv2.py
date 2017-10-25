@@ -2,7 +2,7 @@
 # File: sumcsv2.py
 # Author: Matthew Beals User ID: Mbeal872 Class: CPS 110
 # Desc: This program continues the sumcsv.py file
-#this program also handles .xlsx file formats and can read and write
+# this program also handles .xlsx file formats and can read and write
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 import sys
 import csv
@@ -55,3 +55,4 @@ print(column1 + ',' + column2)
 
 for i in sorted(fileDic):
     print(i +','+ str(fileDic[i]))
+
