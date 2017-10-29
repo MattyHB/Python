@@ -19,7 +19,18 @@ xceldoc = sys.argv[2]
 
 if jsonpoint[:3] == "http":
     print(jsonpoint[:3])
-    jsonpoint = requests.get(sys.argv[1])
+    try:
+        jsonpoint = requests.get(sys.argv[1])
+    except Exception as e:
+        print("The URL you submitted is unavalible.")
+        print('Usage: python json2excel.py filename-or-url spreadsheet-filename')
+        sys.exit(1)
     jsonpoint = jsonpoint.json
+
+try:
+    pandas.read_json(jsonpoint)
+except Exception as e:
+    print("The URL you submitted is unavalible.")
+    print('Usage: python json2excel.py filename-or-url spreadsheet-filename')
 
 pandas.read_json(jsonpoint).to_excel(xceldoc)
