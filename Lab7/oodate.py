@@ -4,7 +4,7 @@ class Date:
         self.month = month
         self.day = day
     def makeDate(self) -> (int, int, int):
-        return (year, month, day)
+        return (self.year, self.month, self.day)
 
     def getYear(self) -> int:
         return self.year
@@ -16,16 +16,17 @@ class Date:
         return self.day
 
     def addMonths(self, months: int) -> (int, int, int):
-        year = getYear(date)
-        month = getMonth(date)
-        day = getDay(date)
+        year = self.getYear()
+        month = self.getMonth()
+        day = self.getDay()
 
-        return makeDate(self.year + (self.month + months - 1) // 12,
+        addedMonths = (self.year + (self.month + months - 1) // 12,
                         ((self.month + months - 1) % 12 + 1),
-                        day)
+                        self.day)
+        return self.makeDate(addedMonths)
 
-    def toString(date: (int, int, int)) -> str:
-        return "{}-{:02}-{:02}".format(date[0], date[1], date[2])
+    def toString(self, date: (int, int, int)) -> str:
+        return '{}-{:02}-{:02}'.format(self.year , self.month, self.day)
 
 def test_Date_Constructor():
     d = Date(1997, 3, 12)
@@ -46,16 +47,18 @@ def test_getDay():
     assert d.getDay() == 12
 
 def test_toString():
-    date = makeDate(2017,11,1)
-    assert toString(date) == "2017-11-01"
+    d = Date(2017, 11 ,1)
+    new = d.makeDate
+    assert d.toString(new) == "2017-11-01"
 
 def test_addMonths():
     d = Date(2017,11,1)
-    d.makeDate()
-    newDate = addMonths(1)
-    assert getYear(newDate) == 2017
-    assert getMonth(newDate) == 12
+    newd = d.makeDate()
+    
+    newDate = d.addMonths(1)
+    assert d.getYear(newDate) == 2017
+    assert d.getMonth(newDate) == 12
 
-    newDate = addMonths(2)
-    assert getYear(newDate) == 2018
-    assert getMonth(newDate) == 1
+    newDate = d.addMonths(2)
+    assert d.getYear(newDate) == 2018
+    assert d.getMonth(newDate) == 1

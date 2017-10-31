@@ -1,5 +1,4 @@
 {
   "ooclock.py::test_hours": true,
-  "oodate.py::test_addMonths": true,
-  "oodate.py::test_toString": true
+  "oodate.py::test_addMonths": true
 }

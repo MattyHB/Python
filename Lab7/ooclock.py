@@ -17,8 +17,6 @@ class Clock:
         return "{}:{:02}".format(self.hours, self.minutes)
 
 
-
-
 # Tests
 def test_Clock_constructor():
     c = Clock(5, 15)
