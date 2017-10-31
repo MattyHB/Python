@@ -16,7 +16,6 @@ def select(items: list, key: str) ->list:
         else:
             current += 1
     return final
-    
 # - Tests - 
 def test_Stringify():
     assert stringify(['a','b','c']) == ':<a>:<b>:<c>:'
