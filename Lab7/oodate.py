@@ -15,16 +15,20 @@ class Date:
     def getDay(self) -> int:
         return self.day
 
+
+    #### Whattt?
+    #### Why can't I get this section?
+
     def addMonths(self, months: int) -> (int, int, int):
         year = self.getYear()
         month = self.getMonth()
         day = self.getDay()
 
-        addedMonths = (self.year + (self.month + months - 1) // 12,
-                        ((self.month + months - 1) % 12 + 1),
-                        self.day)
-        return self.makeDate(addedMonths)
-
+        newDate = (self.year + (self.month + months - 1) // 12, ((self.month + months - 1) % 12 + 1), self.day)
+        print(newDate)
+        print(self.makeDate(newDate))
+        return self.makeDate(newDate)
+        
     def toString(self, date: (int, int, int)) -> str:
         return '{}-{:02}-{:02}'.format(self.year , self.month, self.day)
 
