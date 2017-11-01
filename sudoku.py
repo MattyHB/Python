@@ -44,7 +44,7 @@ class Sudoku:
     def possible(self, x, y):
         pos = [1,2,3,4,5,6,7,8,9]
         
-        # check row
+    # check row
         for cell in self.row(x,y):
             if cell == 0:
 		continue
@@ -66,8 +66,10 @@ class Sudoku:
 
     def solve(self):
         while not self.complete():
+            self.possible()
             if len(self.possible) == 1:
                 # change the value to the only poss
+                
                 # if not, keep going
                 #repeat till the second coming
                 
