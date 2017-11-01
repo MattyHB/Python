@@ -3,6 +3,10 @@ class Date:
         self.year = year
         self.month = month
         self.day = day
+
+    def __str__(self):
+        return '{}-{:02}-{:02}'.format(self.year , self.month, self.day)
+
     def makeDate(self) -> (int, int, int):
         return (self.year, self.month, self.day)
 
@@ -15,22 +19,14 @@ class Date:
     def getDay(self) -> int:
         return self.day
 
+    def addMonths(self, months: int) -> (int,int,int):
+        newYear = self.year + (self.month + months -1) // 12 
+        newMonth = (self.month + months -1) % 12 + 1
+        newDay = self.day
+        newDate = Date(newYear, newMonth, newDay)
+        return newDate
 
-    #### Whattt?
-    #### Why can't I get this section?
-
-    def addMonths(self, months: int) -> (int, int, int):
-        year = self.getYear()
-        month = self.getMonth()
-        day = self.getDay()
-
-        newDate = (self.year + (self.month + months - 1) // 12, ((self.month + months - 1) % 12 + 1), self.day)
-        print(newDate)
-        print(self.makeDate(newDate))
-        return self.makeDate(newDate)
-        
-    def toString(self, date: (int, int, int)) -> str:
-        return '{}-{:02}-{:02}'.format(self.year , self.month, self.day)
+# ----- Test Data -----
 
 def test_Date_Constructor():
     d = Date(1997, 3, 12)
@@ -53,16 +49,23 @@ def test_getDay():
 def test_toString():
     d = Date(2017, 11 ,1)
     new = d.makeDate
-    assert d.toString(new) == "2017-11-01"
+    assert str(d) == "2017-11-01"
 
 def test_addMonths():
-    d = Date(2017,11,1)
-    newd = d.makeDate()
-    
-    newDate = d.addMonths(1)
-    assert d.getYear(newDate) == 2017
-    assert d.getMonth(newDate) == 12
+    d = Date(2017, 11, 1)
 
     newDate = d.addMonths(2)
-    assert d.getYear(newDate) == 2018
-    assert d.getMonth(newDate) == 1
+    assert newDate.getYear() == 2018
+    assert newDate.getMonth() == 1
+    
+    newDate = d.addMonths(3)
+    assert newDate.getYear() == 2018
+    assert newDate.getMonth() == 2
+
+    newDate = d.addMonths(0)
+    assert newDate.getYear() == 2017
+    assert newDate.getMonth() == 11
+
+    newDate = d.addMonths(1)
+    assert newDate.getYear() == 2017
+    assert newDate.getMonth() == 12
