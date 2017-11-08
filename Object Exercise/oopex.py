@@ -18,6 +18,7 @@ class Address:
     def setEmail(self, newEmail: str):
         self.__email = newEmail
 
+
     def setName(self, newName: str):
         self.__name = newName
     
@@ -49,7 +50,7 @@ class AddressBook:
             return None
     def getNames(self):
         AlphList = []
-        for i in self.__addresses:
+        for i in sorted(self.__addresses):
             AlphList.append(i)
         return AlphList
 
