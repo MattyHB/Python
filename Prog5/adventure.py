@@ -1,4 +1,21 @@
+# −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
+# File: adventure.py
+# Author: Matthew Beals User ID: Mbeal872 Class: CPS 110
+# Desc: This program is a text adventure game based on the 
+# floor plan of the original house of Dr. Schaub. 
+# −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 class Location:
+    def __init__(self, descripion: str, items: list ):
+        self.description = descripion
+        self.items = items
+        
+        self.north = None
+        self.south = None
+        self.east = None
+        self.west = None
+    
+    def __repr__(self):
+        return self.description
 
 class World:    
     def __init__(self):
@@ -34,17 +51,24 @@ class World:
 
         self.loc = diningroom
         self.items = []
+
     
-    def go(self, dir: str) -> str:
-        try:
-            if dir == 's'
-                self.loc = self.loc.south
-            elif dir == 'n':
-                self.loc = self.loc.north
-            elif dir == 'w':
-                self.loc = self.loc.west
-            elif dir == 'e':
-                self.loc = slef.loc.east
-        except Exception as e:
-            return "You can’t go that way."
+    def look(self) -> str:
+        if self.loc == None:
+            return "You can't go that way."
+        else:
+            return "You are " + str(self.loc) + "."
         
+    def go(self, dir: str) -> str:
+
+        if dir == 's':
+            self.loc = self.loc.south
+        elif dir == 'n':
+            self.loc = self.loc.north
+        elif dir == 'w':
+            self.loc = self.loc.west
+        elif dir == 'e':
+            self.loc = self.loc.east
+        else:
+            return "You can’t go that way."
+        return self.look()
