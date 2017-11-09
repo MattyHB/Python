@@ -51,23 +51,18 @@ class World:
 
         self.loc = diningroom
         self.items = []
-
     
     def look(self) -> str:
-        if self.loc == None:
-            return "You can't go that way."
-        else:
-            return "You are " + str(self.loc) + "."
+        return "You are " + str(self.loc) + "."
         
     def go(self, dir: str) -> str:
-
-        if dir == 's':
+        if dir == 's' and self.loc.south != None:
             self.loc = self.loc.south
-        elif dir == 'n':
+        elif dir == 'n'and self.loc.north != None:
             self.loc = self.loc.north
-        elif dir == 'w':
+        elif dir == 'w'and self.loc.west != None:
             self.loc = self.loc.west
-        elif dir == 'e':
+        elif dir == 'e'and self.loc.east != None:
             self.loc = self.loc.east
         else:
             return "You can’t go that way."
