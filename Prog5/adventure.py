@@ -65,5 +65,5 @@ class World:
         elif dir == 'e'and self.loc.east != None:
             self.loc = self.loc.east
         else:
-            return "You can’t go that way."
+            return "You can't go that way."
         return self.look()
