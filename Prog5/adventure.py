@@ -95,5 +95,4 @@ class World:
             return 'You aren’t carrying anything.'
 
     def lookaround(self) -> str:
-    
-        return self.loc.items
+        return "You see: " + str(self.loc.items)
