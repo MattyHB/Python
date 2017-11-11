@@ -16,11 +16,16 @@ class Location:
     
     def __repr__(self):
         return self.description
-class Items:
+
+class Item:
     def __init__(self, description: str, movable: bool, extDescription:str):
         self.description = description
         self.movable = movable
         self.extDescription = extDescription
+
+    def __repr__(self):
+        return self.description
+
 
 class World:    
     def __init__(self):
@@ -82,3 +87,13 @@ class World:
         else:
             return "You can't go that way."
         return self.look()
+
+    def carrying(self) -> str:
+        if self.inventory != None:
+            return 'You are carrying: ' + str(self.inventory[0])
+        else:
+            return 'You aren’t carrying anything.'
+
+    def lookaround(self) -> str:
+    
+        return self.loc.items
