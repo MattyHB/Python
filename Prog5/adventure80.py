@@ -16,31 +16,16 @@ class Location:
     
     def __repr__(self):
         return self.description
-class Items:
-    def __init__(self, description: str, movable: bool, extDescription:str):
-        self.description = description
-        self.movable = movable
-        self.extDescription = extDescription
 
 class World:    
     def __init__(self):
-        diningroom = Location('in a cheerful dining room', 
-                                [Item('keys', True, 'The keys jingle as you examine them.'), 
-                                Item('a small child', True, "The child appears to be pulling CD's out of the stack.")])
-        kitchen = Location('in a warm, inviting kitchen', 
-                                [Item('a white microwave', True, "Mmmm... something inside smells yummy!"), 
-                                Item('a large refrigerator', False, "There is a large padlock around the refrigerator.")])
-        livingroom = Location('in a comfortable living room', 
-                                [Item('a grand piano', False, 'The piano is dusty.'), 
-                                Item('a book of Bach preludes', True, 'Someone has marked up one of the preludes using a blue marker.')])
-        mbedroom = Location('in the master bedroom', 
-                                [Item('an alarm clock', True, 'The clock is set for 3 a.m.'), 
-                                Item('a small crib', False, 'The crib is empty.')])
+        diningroom = Location('in a cheerful dining room', [])
+        kitchen = Location('in a warm, inviting kitchen', [])
+        livingroom = Location('in a comfortable living room', [])
+        mbedroom = Location('in the master bedroom', [])
         hallway = Location('in a small hallway', [])
-        cbedroom = Location('in another bedroom', 
-                                [Item('a well-worn teddy bear', True, 'One of the ears is missing.')])
-        bathroom = Location('in a small bathroom', 
-                                [Item('a gold key', True, 'The key is glowing.')])
+        cbedroom = Location('in another bedroom', [])
+        bathroom = Location('in a small bathroom', [])
 
         # Set up exits
         diningroom.west = kitchen
@@ -65,7 +50,7 @@ class World:
         bathroom.north = hallway
 
         self.loc = diningroom
-        self.inventory = [Item('a green basket', True, 'The basket has a broken handle.')]
+        self.items = []
     
     def look(self) -> str:
         return "You are " + str(self.loc) + "."
