@@ -5,8 +5,8 @@
 # floor plan of the original house of Dr. Schaub. 
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 class Location:
-    def __init__(self, description: str, items: list ):
-        self.description = description
+    def __init__(self, descripion: str, items: list ):
+        self.description = descripion
         self.items = items
         
         self.north = None
@@ -89,57 +89,19 @@ class World:
         return self.look()
 
     def carrying(self) -> str:
-        invitem = ''
-        if self.inventory != []:
-            for i in range(len(self.inventory)):
-                invitem += str(self.inventory[i])
-                if (i == len(self.inventory) -1):
-                    invitem += "."
-                    return 'You are carrying: ' + invitem
-                else:
-                    invitem += ', '   
-                    
+        if self.inventory != None:
+            return 'You are carrying: ' + str(self.inventory[0]) + '.'
         else:
             return 'You aren’t carrying anything.'
 
     def lookaround(self) -> str:
         rooomItemz = ''
+
         for i in range(len(self.loc.items)):
             rooomItemz += str(self.loc.items[i])
             if (i == len(self.loc.items) - 1):
                 rooomItemz += '.'
             else:
                 rooomItemz += ', '
+
         return "You see: " + rooomItemz
-
-    def examine(self, descr: str) -> str:
-        for i in self.loc.items:
-            if descr in i.description:
-                return i.extDescription
-
-        for i in self.inventory:
-            if descr in i.description:
-                return i.extDescription
-
-        return "There is no " + descr + " here."
-
-    def take(self, descr: str) -> str:
-        
-        for i in self.loc.items:
-            if descr in i.description and i.movable == True:
-                self.inventory.append(i)
-                self.loc.items.remove(i)
-                return "You pick up " + str(self.inventory[1]) + '. ' + self.carrying()
-            
-            if descr in i.description and i.movable == False:
-                return "You can't take that!"    
-        return 'There is no ' + descr + " here."
-
-    def drop(self, descr: str) -> str:
-
-        for i in self.inventory:
-            if descr in i.description:
-                self.loc.items.append(i)
-                self.inventory.remove(i)
-                return "You drop " + str(i) + '. ' + self.carrying()
-        return "You are not carrying " + descr + "."
