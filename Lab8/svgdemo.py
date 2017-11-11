@@ -1,4 +1,3 @@
-
 import bottle
 import random
 import traceback
@@ -10,14 +9,16 @@ class SVGDrawing:
         self.svgdata = []
     
     def drawRect(self, x: int, y:int, width: int, height:int , color: str):
-        self.svgdata.append("<rect x='{0}' y='{1}' width='{2}' height='{3}' fill={4} />".format(x, y, width, height, color))
+        self.svgdata.append("<rect x='{0}' y='{1}' width='{2}' height='{3}' fill='{4}' />".format(x, y, width, height, color))
     
-    def drawLine(self, startx, starty, endx, endy):
+    def drawLine(self, startx, starty, endx, endy, color):
+        self.svgdata.append("<line x1='{0}' y1='{1}' x2='{2}' y2='{3}' stroke='{4}' />".format(startx, starty, endx, endy, color))
 
+    def drawText(self, x, y, text):  
+        self.svgdata.append("<text x='{0}' y='{1}' font-family='Verdana' font-size='10' stroke='white'>{2}</text>".format(x, y, text))
 
-    def drawText():  
-
-    def drawImage():      
+    def drawImage(self, x, y, image, width, height ):  
+        self.svgdata.append("<image x='{0}' y='{1}' xlink:href='images/{2}' width='{3}' height='{4}' />".format(x, y, image, width, height))
 
     def generateDrawing(self):
         string = ''
@@ -25,32 +26,24 @@ class SVGDrawing:
             string += i + '\n'
         
         return string
-        
-
-
 
 WIDTH=700
 HEIGHT=700
-
 
 @bottle.route('/')
 def welcome():  
     d = SVGDrawing(700,700)
     d.drawRect(0,0,700,700, 'black')
+    
+    for x in range(0, WIDTH+1, 100):
+        d.drawLine(x,0,x,WIDTH,'green')
+
+    for y in range(0, HEIGHT+1, 100):
+        d.drawLine(0, y, WIDTH, y, 'green')
+
+    d.drawImage(20,30,'duck.png',50,50)
+    d.drawText(10,20, 'Some text here')
     drawing = d.generateDrawing()
-    #svgdata = []
-    #svgdata.append("<rect x='0' y='0' width='{}' height='{}' fill='black' />".format(WIDTH, HEIGHT))
-
-    #for x in range(0, WIDTH+1, 100):
-    #    svgdata.append("<line x1='{0}' y1='0' x2='{0}' y2='{1}' stroke='green' />".format(x, HEIGHT))
-
-    #for y in range(0, HEIGHT+1, 100):
-   #    svgdata.append("<line x1='0' y1='{0}' x2='{1}' y2='{0}' stroke='green' />".format(y, WIDTH))
-
- #   svgdata.append("<image x='{0}' y='{1}' xlink:href='images/{2}' width='50' height='50' />".format(20, 30, 'duck.png'))
-  #  svgdata.append("<text x='{0}' y='{1}' font-family='Verdana' font-size='10' stroke='white'>{2}</text>".format(10, 20, 'Some text here'))
-   #     
-    #svgstring = '\n'.join(svgdata)
     return HTML_PAGE.format(WIDTH, HEIGHT, drawing)
 
 @bottle.route('/<filename:path>')
