@@ -2,14 +2,14 @@ class Sudoku:
     def __init__(self, board):
         self.board = board
 
-    def __str__(self):
+    def __repr__(self):
         string = ''
         num = 0
         while num < 9:
             string += str(self.board[num])
             string += '\n'
             num += 1
-        return string
+        return string 
 
     def cell(self, x, y):
         xlevel = self.board[x]
@@ -38,44 +38,44 @@ class Sudoku:
         l = []
         for x in range(boxX*3, boxX*3 + 3):
             for y in range(boxY*3, boxY*3 + 3):
-		l.append(s.cell(x,y))
-	return l
+                l.append[self.cell(x,y)]
+        return l
 
     def possible(self, x, y):
         pos = [1,2,3,4,5,6,7,8,9]
-        
     # check row
         for cell in self.row(x,y):
             if cell == 0:
-		continue
+                continue
             elif cell in pos:
-		pos.remove(cell)
+                pos.remove(cell)
 	# check column
         for cell in self.column(x,y):
             if cell == 0:
-		continue
+                continue
             elif cell in pos:
-		pos.remove(cell)
+                pos.remove(cell)
 	# check box
         for cell in self.box(x,y):
             if cell == 0:
-		continue
+                continue
             elif cell in pos:
-		pos.remove(cell)
-	return pos
+                pos.remove(cell)
+        return pos
 
     def solve(self):
-        while not self.complete():
-            self.possible()
-            if len(self.possible) == 1:
-                # change the value to the only poss
-                
-                # if not, keep going
-                #repeat till the second coming
+        while self.complete() == False:
+            #self.possible()
+            for cell in self.board:
+                for i in cell:
+                    #Throwing Exception
+                    if len(self.possible) == 1:
+                        i = self.possible
+                    
+        return self.board
+         
                 
             
-            
-
 puzzle = [  [0,9,0,1,0,0,0,0,6],
             [0,0,6,8,0,0,2,9,7],
             [5,7,0,0,0,0,1,0,8],
@@ -85,3 +85,13 @@ puzzle = [  [0,9,0,1,0,0,0,0,6],
             [6,0,3,0,0,0,0,4,9],
             [2,5,7,0,0,8,3,0,0],
             [9,0,0,0,0,6,0,8,0]]
+
+
+
+#For Debugger
+
+p = Sudoku(puzzle)
+
+p.solve()
+
+print(p)
