@@ -64,13 +64,13 @@ class Sudoku:
         return pos
 
     def solve(self):
-        while self.complete() == False:
-            #self.possible()
-            for cell in self.board:
-                for i in cell:
-                    #Throwing Exception
-                    if len(self.possible) == 1:
-                        i = self.possible
+        while self.complete() == True:
+            for row in range(0,10):
+                for column in range(0,10):
+                    pos = self.possible(row, column)
+                    if len(pos) ==1:
+                        self.board[column][row] == pos[0]
+                    
                     
         return self.board
          
