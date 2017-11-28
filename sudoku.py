@@ -1,6 +1,7 @@
 class Sudoku:
     def __init__(self, board):
         self.board = board
+        self.complete = False
 
     def __repr__(self):
         string = ''
@@ -9,27 +10,27 @@ class Sudoku:
             string += str(self.board[num])
             string += '\n'
             num += 1
-        return string 
+        return string
 
-    def cell(self, x, y):
+    def cell(self, x, y) -> int:
         xlevel = self.board[x]
         cell = xlevel[y]
         return cell
 
-    def row(self, x):
+    def row(self, x, y):
         return self.board[x]
 
-    def column(self, y):
+    def column(self, x, y):
         colLis = []
         for item in self.board:
             colLis.append(item[y])
         return colLis
 
-    def complete(self):
+    def iscomplete(self):
         if 0 in self.board:
-            return False
+            self.complete = False
         else:
-            return True
+            self.complete = True
         
     def box(self, x, y):
         boxX = x // 3
@@ -38,7 +39,8 @@ class Sudoku:
         l = []
         for x in range(boxX*3, boxX*3 + 3):
             for y in range(boxY*3, boxY*3 + 3):
-                l.append[self.cell(x,y)]
+                b = self.cell(x,y)
+                l.append(b)
         return l
 
     def possible(self, x, y):
@@ -49,29 +51,46 @@ class Sudoku:
                 continue
             elif cell in pos:
                 pos.remove(cell)
+    #Debugging
+            print("Row Checked")
 	# check column
         for cell in self.column(x,y):
             if cell == 0:
                 continue
             elif cell in pos:
                 pos.remove(cell)
+    #Debugging
+            print("Column Checked")
+
 	# check box
         for cell in self.box(x,y):
             if cell == 0:
                 continue
             elif cell in pos:
                 pos.remove(cell)
+            #Debugging
+            print("Box Checked")
+        self.iscomplete()
         return pos
+    
+    
+    def step(self):
+        # Not sure if this is right...
+        for row in range(0,9):
+            for column in range(0,9):
+                pos = self.possible(row,column)
+                if len(pos) == 1:
+                    self.board[column][row] == pos
+                    print("Item Added")
 
     def solve(self):
-        while self.complete() == True:
-            for row in range(0,10):
-                for column in range(0,10):
-                    pos = self.possible(row, column)
-                    if len(pos) ==1:
-                        self.board[column][row] == pos[0]
-                    
-                    
+        while self.complete == False:
+            for row in range(0,9):
+                for column in range(0,9):
+                    pos = self.possible(row,column)
+                    if len(pos) == 1:
+                        self.board[column][row] == pos
+                        print("****** Item Added ******") 
         return self.board
          
                 
@@ -86,11 +105,21 @@ puzzle = [  [0,9,0,1,0,0,0,0,6],
             [2,5,7,0,0,8,3,0,0],
             [9,0,0,0,0,6,0,8,0]]
 
+puzzle2 = [ [6,0,0,1,0,8,2,0,3],
+            [0,2,0,0,4,0,0,9,0],
+            [8,0,3,0,0,5,4,0,0],
+            [5,0,4,6,0,7,0,0,9],
+            [0,3,0,0,0,0,0,5,0],
+            [7,0,0,8,0,3,1,0,2],
+            [0,0,1,7,0,0,9,0,6],
+            [0,8,0,0,3,0,0,2,0],
+            [3,0,2,9,0,4,0,0,5]]
+
 
 
 #For Debugger
 
-p = Sudoku(puzzle)
+p = Sudoku(puzzle2)
 
 p.solve()
 
