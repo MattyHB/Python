@@ -2,7 +2,7 @@
 '''Autom8r: filter input lines using wildcard globs
 
 WARNING: starting implementation supports only 1 glob pattern exactly
-         (some challenges require support for more patterns)
+        (some challenges require support for more patterns)
 '''
 import fnmatch
 import sys
