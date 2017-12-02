@@ -1,2 +1,2 @@
 python files.py C:\incremental_backup\src1 C:\incremental_backup\src2 C:\incremental_backup\src3 | python isnewerthan.py C:\incremental_backup\dest | python tee.py C:\incremental_backup\logs\archived-%Y-%m-%d.txt| python co.py C:\incremental_backup\dest
-python files.py C:\file_popularity\media| python sortby.py atime | python first.py 10| python tee.py C:\file_popularity\sallys-log-file.txt
+python files.py C:\file_popularity\media | python sortby.py atime | python first.py 10 >> C:\file_popularit
