@@ -1,0 +1,1 @@
+python files.py C:\incremental_backup\src1 C:\incremental_backup\src2 C:\incremental_backup\src3 | python isnewerthan.py C:\incremental_backup\dest | python tee.py C:\incremental_backup\logs\archived-%Y-%m-%d.txt| python co.py C:\incremental_backup\dest
