@@ -31,4 +31,3 @@ class BallBag:
     def getBalls(self) -> str:
         for item in self.bag:
             print(self.bag[item],"/", self.bag)
-
