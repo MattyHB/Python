@@ -18,7 +18,6 @@ for line in sys.stdin:
 # Now that I know how to access each value, I need to know how to compare them and return the 
 # name based on the sorting 
 sortable = []
-testList =[]
 
 for (name, size, mtime, atime) in fileList:
     i = 0

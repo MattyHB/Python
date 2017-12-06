@@ -1,2 +1,3 @@
-python files.py C:\incremental_backup\src1 C:\incremental_backup\src2 C:\incremental_backup\src3 | python isnewerthan.py C:\incremental_backup\dest | python tee.py C:\incremental_backup\logs\archived-%Y-%m-%d.txt| python co.py C:\incremental_backup\dest
-python files.py C:\file_popularity\media | python sortby.py atime | python first.py 10 >> C:\file_popularit
+Incremental Folder Backup: python files.py C:\incremental_backup\src1 C:\incremental_backup\src2 C:\incremental_backup\src3 | python isnewerthan.py C:\incremental_backup\dest | python tee.py C:\incremental_backup\logs\archived-%Y-%m-%d.txt| python co.py C:\incremental_backup\dest
+Spreadsheet-Controlled Archiver: python dumpxl.py C:\spreadsheet_archive\bobs-spreadsheet-new-2-DONT-DELETE.xlsx 1 '-skip' | python rebase.py C:\spreadsheet_archive\src | python archive.py C:\spreadsheet_archive\dest\bobs-backups-%Y-%m-%d.zip
+File Popularity Tracker: python files.py C:\file_popularity\media | python sortby.py atime | python first.py 10 >> C:\file_popularity\sallys-log-file.txt

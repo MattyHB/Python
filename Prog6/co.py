@@ -14,5 +14,3 @@ for line in input:
     line = line.rstrip('\n')
     shutil.copy2(line, outdir)
     print(shutil.copy2(line, outdir))
-
-print()
