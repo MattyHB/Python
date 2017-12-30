@@ -5,7 +5,7 @@ import time
 
 try:
     logname = time.strftime(sys.argv[1])    # treat filename as pattern for strftime (%Y, %m, %d, etc.)
-    logfile = open(logname, "w")            # open file for over-writing
+    logfile = open(logname, "a")            # open file for over-writing
 except IndexError:
     logfile = sys.stderr
 
