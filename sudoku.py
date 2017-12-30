@@ -73,28 +73,26 @@ class Sudoku:
         self.iscomplete()
         return pos
     
-    
     def step(self):
         # Not sure if this is right...
         for row in range(0,9):
             for column in range(0,9):
-                pos = self.possible(row,column)
-                if len(pos) == 1:
-                    self.board[column][row] == pos
-                    print("Item Added")
+                temp = self.possible(row,column)
+                if len(temp) == 1:
+                    self.board[column][row] = temp
+                    print("****** Item Added ******") 
+        return self.board
 
     def solve(self):
         while self.complete == False:
             for row in range(0,9):
                 for column in range(0,9):
-                    pos = self.possible(row,column)
-                    if len(pos) == 1:
-                        self.board[column][row] == pos
+                    temp = self.possible(row,column)
+                    if len(temp) == 1:
+                        self.board[column][row] = temp
                         print("****** Item Added ******") 
         return self.board
-         
                 
-            
 puzzle = [  [0,9,0,1,0,0,0,0,6],
             [0,0,6,8,0,0,2,9,7],
             [5,7,0,0,0,0,1,0,8],
@@ -115,11 +113,9 @@ puzzle2 = [ [6,0,0,1,0,8,2,0,3],
             [0,8,0,0,3,0,0,2,0],
             [3,0,2,9,0,4,0,0,5]]
 
-
-
 #For Debugger
 
-p = Sudoku(puzzle2)
+p = Sudoku(puzzle)
 
 p.solve()
 
